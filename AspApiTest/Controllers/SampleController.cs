@@ -16,9 +16,14 @@ namespace AspApiTest.Controllers {
         /// https://localhost:7105/sample にアクセスで、「request success」を返却
         /// </summary>
         /// <returns></returns>
-        [HttpGet(Name ="sample")]
-        public String Sample() {
-            return "request success";
+        [HttpGet(Name = "sample")]
+        public String Sample([FromQuery(Name = "param1")] string? param1) {
+
+            if (String.IsNullOrWhiteSpace(param1)) {
+                return "param1 is null or white space";
+            }
+
+            return "request success \nparam1 = " + param1;
         }
     }
 }
